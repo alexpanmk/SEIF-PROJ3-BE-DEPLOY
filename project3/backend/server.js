@@ -27,7 +27,14 @@ app.use(express.json());
 app.use(express.urlencoded({ extended: false }));
 app.use(cookieParser());
 app.use(express.static(path.join(__dirname, 'public')));
-app.use(cors());
+
+const corsOptions = {
+  origin: 'https://seif-project-3-fe.onrender.com',
+  optionsSuccessStatus: 200 // For legacy browser support
+};
+
+
+app.use(cors(corsOptions));
 app.use(securityMiddleware.checkJWT);
 
 app.use('/daycard', daycardRouter);
